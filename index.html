@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Jana — من أجل جنى — Pour Jana</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;500&family=IM+Fell+English:ital@0;1&family=Scheherazade+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2c1a0e;
+    --parchment: #f5ede0;
+    --parchment-dark: #e8d9c3;
+    --gold: #b8892a;
+    --gold-light: #d4a94a;
+    --rose: #c9736a;
+    --rose-light: #e8a89f;
+    --cream: #faf4eb;
+    --shadow: rgba(44, 26, 14, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='3' fill='%23b8892a' opacity='0.7'/%3E%3C/svg%3E"), auto;
+  }
+
+  /* Paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 40%, rgba(200,160,100,0.18) 0%, transparent 70%),
+      var(--parchment);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .petals {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    width: 8px; height: 12px;
+    border-radius: 50% 50% 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  .hero-ornament {
+    font-size: 1.8rem;
+    color: var(--gold);
+    letter-spacing: 0.5rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards 0.3s;
+  }
+
+  .hero-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.4s ease forwards 0.6s;
+  }
+
+  .hero-title span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--rose);
+    letter-spacing: 0.15rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1.4s ease forwards 0.9s;
+  }
+
+  .scroll-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.6s, pulse 3s ease-in-out infinite 2.5s;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    position: relative;
+  }
+
+  .section + .section {
+    border-top: 1px solid rgba(184,137,42,0.2);
+  }
+
+  /* ── LANGUAGE BADGE ── */
+  .lang-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-light);
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    margin-bottom: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ── LETTER BODY ── */
+  .letter {
+    background: var(--cream);
+    border: 1px solid var(--parchment-dark);
+    border-radius: 2px;
+    padding: 3.5rem 3rem;
+    position: relative;
+    box-shadow:
+      0 2px 20px var(--shadow),
+      inset 0 0 40px rgba(200,160,100,0.06);
+  }
+
+  .letter::before {
+    content: '';
+    position: absolute;
+    top: 12px; left: 12px; right: 12px; bottom: 12px;
+    border: 1px solid rgba(184,137,42,0.15);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+
+  .letter-corner {
+    position: absolute;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    opacity: 0.5;
+  }
+  .letter-corner.tl { top: 1.2rem; left: 1.2rem; }
+  .letter-corner.tr { top: 1.2rem; right: 1.2rem; transform: scaleX(-1); }
+  .letter-corner.bl { bottom: 1.2rem; left: 1.2rem; transform: scaleY(-1); }
+  .letter-corner.br { bottom: 1.2rem; right: 1.2rem; transform: scale(-1); }
+
+  /* ── ENGLISH ── */
+  .en-letter p {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.15rem;
+    line-height: 2.1;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .en-letter .salutation {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .en-letter .closing {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-top: 2rem;
+    display: block;
+    text-align: right;
+  }
+
+  /* ── ARABIC ── */
+  .ar-section { direction: rtl; text-align: right; }
+
+  .ar-letter p {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.35rem;
+    line-height: 2.4;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .ar-letter .salutation {
+    font-family: 'Scheherazade New', serif;
+    font-size: 2.2rem;
+    color: var(--rose);
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .ar-letter .closing {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.7rem;
+    color: var(--ink);
+    margin-top: 2rem;
+    display: block;
+    text-align: left;
+  }
+
+  /* ── FRENCH ── */
+  .fr-letter p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.18rem;
+    line-height: 2.1;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  .fr-letter .salutation {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+    margin-bottom: 2rem;
+    display: block;
+    font-style: normal;
+  }
+
+  .fr-letter .closing {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-top: 2rem;
+    display: block;
+    text-align: right;
+    font-style: normal;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    color: var(--gold);
+    letter-spacing: 1rem;
+    font-size: 1rem;
+    opacity: 0.6;
+  }
+
+  /* ── FINAL QUESTION ── */
+  .question-section {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200,140,100,0.12), transparent);
+  }
+
+  .question-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .question-text em {
+    color: var(--rose);
+    display: block;
+    font-size: 1.2em;
+    margin-top: 0.5rem;
+  }
+
+  .question-ar {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    color: var(--ink);
+    direction: rtl;
+    line-height: 1.8;
+    margin: 1rem 0;
+  }
+
+  .question-fr {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    color: #7a5c3a;
+    margin-top: 1rem;
+  }
+
+  .heart-seal {
+    font-size: 3rem;
+    margin: 3rem auto 1rem;
+    display: block;
+    animation: heartbeat 2.5s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%,100%{transform:scale(1)} 15%{transform:scale(1.18)} 30%{transform:scale(1)} 45%{transform:scale(1.1)} 60%{transform:scale(1)}
+  }
+
+  .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: 0.2rem;
+    margin-top: 1rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(184,137,42,0.2);
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- Falling petals -->
+<div class="petals" id="petals"></div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-ornament">✦ ✦ ✦</div>
+  <h1 class="hero-title">For <span>Jana</span></h1>
+  <p class="hero-sub">A letter written by the light you gave me</p>
+  <p class="scroll-hint">↓ &nbsp; read slowly &nbsp; ↓</p>
+</section>
+
+<!-- ══ ENGLISH ══ -->
+<section class="section reveal">
+  <div class="lang-badge">English</div>
+  <div class="letter en-letter">
+    <span class="letter-corner tl">❧</span>
+    <span class="letter-corner tr">❧</span>
+    <span class="letter-corner bl">❧</span>
+    <span class="letter-corner br">❧</span>
+
+    <span class="salutation">Dearest Jana,</span>
+
+    <p>
+      I have written this letter many times in my mind, and each time the words felt too small for what I truly wish to say. Yet here I am, setting them down at last — not because I have found the perfect words, but because silence has become heavier than honesty.
+    </p>
+    <p>
+      There is something about you that I cannot easily name. It is not merely your presence, nor only the way you speak — it is the feeling you leave behind when you are no longer in the room. A quiet warmth. Like the last hour of afternoon sun that makes everything it touches look as though it belongs in a painting.
+    </p>
+    <p>
+      You are the kind of person whose name I think of before I have even realised I was thinking at all. And that is something I have never quite known before — to feel someone settle so gently into the spaces between ordinary moments.
+    </p>
+    <p>
+      I do not wish to rush anything. I do not wish to place upon you the weight of a question that demands an answer in haste. What I wish, above all else, is for you to know — simply and honestly — that in this life, if I were ever given the grace of walking beside someone, I would want that someone to be you.
+    </p>
+    <p>
+      Not as a fleeting chapter. Not as something passing. But as something kept — carefully, gratefully, for as long as life allows.
+    </p>
+
+    <div class="divider">~ ✦ ~</div>
+
+    <p style="font-style:italic; font-size:1rem; text-align:center; color:#7a5c3a;">
+      I am not asking you for an answer today. I am only asking you to know.
+    </p>
+
+    <span class="closing">Yours, with all sincerity.</span>
+  </div>
+</section>
+
+<!-- ══ ARABIC ══ -->
+<section class="section ar-section reveal">
+  <div class="lang-badge" style="float:right; clear:both;">العربية</div>
+  <div style="clear:both;"></div>
+  <div class="letter ar-letter">
+    <span class="letter-corner tl">❧</span>
+    <span class="letter-corner tr">❧</span>
+    <span class="letter-corner bl">❧</span>
+    <span class="letter-corner br">❧</span>
+
+    <span class="salutation">جنى العزيزة،</span>
+
+    <p>
+      كتبتُ هذه الرسالة مرات عديدة في خيالي، وفي كل مرة كانت الكلمات تبدو أصغر مما أريد أن أقوله حقاً. لكنني ها أنا أضعها أخيراً على الورق — ليس لأنني وجدت الكلمات المثالية، بل لأن الصمت بات أثقل من الصدق.
+    </p>
+    <p>
+      ثمة شيء فيكِ لا أستطيع تسميته بسهولة. ليس مجرد حضوركِ، ولا طريقة حديثكِ وحسب — بل هو الشعور الذي يبقى حين تغادرين المكان. دفء هادئ. كآخر ساعة من ضوء النهار التي تجعل كل ما تلامسه يبدو كأنه لوحة.
+    </p>
+    <p>
+      أنتِ من يخطر ببالي قبل أن أدرك أنني كنت أفكر أصلاً. وهذا شيء لم أعرفه من قبل — أن يستقر شخص ما بهذا الهدوء بين لحظاتي العادية.
+    </p>
+    <p>
+      لا أريد أن أُسرع في شيء. لا أريد أن أضعَ عليكِ ثقل سؤال يستوجب جواباً متعجلاً. ما أريده، قبل كل شيء، أن تعلمي — ببساطة وصدق — أنني لو مُنحتُ في هذه الحياة نعمة السير جنب أحد، لأردتُ أن يكون ذلك الشخص هي أنتِ.
+    </p>
+    <p>
+      ليس فصلاً عابراً. ليس شيئاً يمرّ. بل شيئاً يُحفظ — بعناية وامتنان، ما دامت الحياة تسمح.
+    </p>
+
+    <div class="divider">~ ✦ ~</div>
+
+    <p style="font-family:'Scheherazade New',serif; font-size:1.1rem; text-align:center; color:#7a5c3a;">
+      لا أطلب منكِ جواباً اليوم. أطلب منكِ فقط أن تعلمي.
+    </p>
+
+    <span class="closing">لكِ، بكل صدق.</span>
+  </div>
+</section>
+
+<!-- ══ FRENCH ══ -->
+<section class="section reveal">
+  <div class="lang-badge">Français</div>
+  <div class="letter fr-letter">
+    <span class="letter-corner tl">❧</span>
+    <span class="letter-corner tr">❧</span>
+    <span class="letter-corner bl">❧</span>
+    <span class="letter-corner br">❧</span>
+
+    <span class="salutation">Ma chère Jana,</span>
+
+    <p>
+      J'ai écrit cette lettre bien des fois dans mon esprit, et chaque fois les mots me semblaient trop petits pour ce que je voulais vraiment dire. Pourtant me voilà, les posant enfin sur le papier — non parce que j'ai trouvé les mots parfaits, mais parce que le silence est devenu plus lourd que la sincérité.
+    </p>
+    <p>
+      Il y a quelque chose en toi que je ne saurais nommer facilement. Ce n'est pas seulement ta présence, ni simplement ta façon de parler — c'est ce sentiment qui demeure lorsque tu n'es plus dans la pièce. Une douceur tranquille. Comme la dernière heure de lumière du jour, qui donne à tout ce qu'elle effleure l'apparence d'un tableau.
+    </p>
+    <p>
+      Tu es celle dont le prénom me vient à l'esprit avant même que je réalise que je pensais. Et cela — cette façon de s'installer si doucement dans les espaces entre les instants ordinaires — je ne l'avais jamais connue.
+    </p>
+    <p>
+      Je ne veux rien brusquer. Je ne veux pas te placer sous le poids d'une question qui exige une réponse hâtive. Ce que je veux, par-dessus tout, c'est que tu saches — simplement et honnêtement — que si jamais la vie me faisait la grâce de marcher aux côtés de quelqu'un, je voudrais que ce soit toi.
+    </p>
+    <p>
+      Non comme un chapitre fugace. Non comme quelque chose qui passe. Mais comme quelque chose que l'on garde — avec soin, avec gratitude, aussi longtemps que la vie le permet.
+    </p>
+
+    <div class="divider">~ ✦ ~</div>
+
+    <p style="font-style:italic; font-size:1rem; text-align:center; color:#7a5c3a;">
+      Je ne te demande pas de répondre aujourd'hui. Je te demande seulement de savoir.
+    </p>
+
+    <span class="closing">À toi, avec toute ma sincérité.</span>
+  </div>
+</section>
+
+<!-- ══ FINAL QUESTION ══ -->
+<section class="question-section reveal">
+  <span class="heart-seal">🕯️</span>
+
+  <p class="question-text">
+    Would you let me be the one
+    <em>who stays?</em>
+  </p>
+
+  <p class="question-ar">هل تسمحين لي أن أكون من يبقى؟</p>
+
+  <p class="question-fr">Me laisseras-tu être celui qui reste ?</p>
+
+  <span class="heart-seal">♡</span>
+
+  <p class="signature">Written for Jana, with a gentle and honest heart.</p>
+</section>
+
+<footer>
+  ✦ &nbsp; written with light &nbsp; ✦
+</footer>
+
+
+
+<script>
+  // Falling rose petals
+  const colors = ['#e8a89f','#d4a94a','#c9736a','#b8892a','#e8d9c3'];
+  const petals = document.getElementById('petals');
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.top = Math.random() * 100 + 'vh';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (8 + Math.random() * 14) + 's';
+    p.style.animationDelay = (Math.random() * 12) + 's';
+    p.style.width = (6 + Math.random() * 8) + 'px';
+    p.style.height = (9 + Math.random() * 10) + 'px';
+    p.style.transform = `rotate(${Math.random()*360}deg)`;
+    petals.appendChild(p);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
